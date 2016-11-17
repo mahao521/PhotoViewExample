@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:padding="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:textColor="#101010"
+            android:textSize="16sp"
+            android:lineSpacingMultiplier="1.3"
+            android:text="        2016年11月17日，我给小露露买了一个手机，然而她并不喜欢我，4700的手机，我回家也许可以干很多事情."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_shape"
+            android:textColor="#101010"
+            android:textSize="16sp"
+            android:text="美女控"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_type"/>
+
+        <com.mahao.photoviewexample.utils.ListGridView
+            android:layout_marginTop="10dp"
+            android:id="@+id/list_grid_view"
+            android:numColumns="3"
+            android:horizontalSpacing="4dp"
+            android:verticalSpacing="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.mahao.photoviewexample.utils.ListGridView>
+
+</LinearLayout>

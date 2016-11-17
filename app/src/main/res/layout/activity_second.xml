@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_second"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mahao.photoviewexample.SecondActivity">
+
+    <ListView
+        android:id="@+id/list_view"
+        android:dividerHeight="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/layout_viewpager_second"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:background="#7c7878"
+            android:id="@+id/viewpager_second"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_save_second"
+                android:layout_marginLeft="10dp"
+                android:text="保存"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:textSize="19sp"
+                android:id="@+id/txt_count_second"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="4/6"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btn_share_second"
+                android:layout_marginRight="10dp"
+                android:text="分享"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
