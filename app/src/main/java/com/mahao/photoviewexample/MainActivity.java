@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mLayout = findViewById(R.id.layout_viewpager);
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mPagerAdapter = new ViewPagerAdapter(mList, MainActivity.this,mGridView,mLayout);
+        mPagerAdapter = new ViewPagerAdapter(mList, MainActivity.this,mGridView,mLayout,-1);
         mViewPager.setAdapter(mPagerAdapter);
 
         pagerBack = (ImageView) findViewById(R.id.img_back);
@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void initPhoto(int position,boolean flag){
 
         View currentView = mViewPager.findViewWithTag(position);
+        Log.i("mahao",currentView+"11111111111111111111111");
         if(currentView != null) {
 
             final PhotoView mPhoto = (PhotoView) currentView.findViewById(R.id.photo_view);

@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"/>
 
             <Button
+                android:onClick="secondClick"
                 android:id="@+id/btn_share_second"
                 android:layout_marginRight="10dp"
                 android:text="分享"

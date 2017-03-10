@@ -24,9 +24,14 @@ public class SecondActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.list_view);
         mViewPager = (ViewPager) findViewById(R.id.viewpager_second);
 
-        View viewLayout = findViewById(layout_viewpager_second);
+        View viewLayout = findViewById(R.id.layout_viewpager_second);
 
         ListviewAdapter adapter = new ListviewAdapter(this,mViewPager,viewLayout);
         mListView.setAdapter(adapter);
+    }
+
+    public void secondClick(View view) {
+
+        mViewPager.setCurrentItem(4,false);
     }
 }

@@ -29,15 +29,19 @@ public class ViewPagerAdapter extends PagerAdapter {
     private Info mInfo;
     private View  layoutView;
     private int count = 1;
+    private int currentPosition = 0;
 
     public ViewPagerAdapter(List<Integer> list, Context context, GridView gridView
-    ,View layoutView){
+    ,View layoutView,int position){
 
         this.mList = list;
         this.mContext = context;
         this.mGridView = gridView;
         this.layoutView = layoutView;
+        currentPosition = position;
     }
+
+
 
     @Override
     public int getCount() {
@@ -80,18 +84,32 @@ public class ViewPagerAdapter extends PagerAdapter {
         final PhotoView photoView = (PhotoView) view.findViewById(R.id.photo_view);
         photoView.setImageResource(mList.get(position));
         photoView.enable();
+
+        View girdItem =  mGridView.getChildAt(position);
+        ImageView image = (ImageView) girdItem.findViewById(R.id.img_grid_item);
+        mInfo = PhotoView.getImageViewInfo(image);
         view.setTag(position);
 
-        //item 只执行一次
-        if(count == 1){
+        if(currentPosition != -1){
 
-            View girdItem =  mGridView.getChildAt(position);
-            Log.i("mahao",position + ".."+ girdItem);
-            ImageView image = (ImageView) girdItem.findViewById(R.id.img_grid_item);
-            mInfo = PhotoView.getImageViewInfo(image);
-            photoView.animaFrom(mInfo);
-            count++;
+
         }
+
+        //item 只执行一次
+
+         /* if(currentPosition != -1 ){
+
+                Log.i("mahao","cur-----------" + currentPosition);
+
+                View girdItem =  mGridView.getChildAt(position);
+                //  Log.i("mahao",position + ".."+ girdItem);
+                ImageView image = (ImageView) girdItem.findViewById(R.id.img_grid_item);
+                mInfo = PhotoView.getImageViewInfo(image);
+                photoView.animaFrom(mInfo);
+            }*/
+
+       // Log.i("mahao",position + ".."+ mGridView);
+
         photoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +117,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                 View girdItem =  mGridView.getChildAt(position);
                 ImageView image = (ImageView) girdItem.findViewById(R.id.img_grid_item);
                 mInfo = PhotoView.getImageViewInfo(image);
-                Toast.makeText(mContext, "view_pager--2", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "view_pager--2..." + position, Toast.LENGTH_SHORT).show();
                 photoView.animaTo(mInfo, new Runnable() {
                     @Override
                     public void run() {
@@ -112,6 +130,4 @@ public class ViewPagerAdapter extends PagerAdapter {
         container.addView(view);
         return view;
     }
-
-
 }
