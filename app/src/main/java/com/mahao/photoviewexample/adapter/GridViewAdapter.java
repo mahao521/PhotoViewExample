@@ -1,6 +1,7 @@
 package com.mahao.photoviewexample.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.mahao.photoviewexample.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -16,11 +18,11 @@ import java.util.List;
  */
 public class GridViewAdapter extends BaseAdapter {
 
-    private List<Integer> mIntegerList;
+    private List<String> mIntegerList;
     private Context mContext;
 
 
-    public GridViewAdapter(List<Integer> mlist,Context context){
+    public GridViewAdapter(List<String> mlist,Context context){
 
         this.mIntegerList = mlist;
         this.mContext = context;
@@ -33,6 +35,7 @@ public class GridViewAdapter extends BaseAdapter {
         if(mIntegerList != null){
             len = mIntegerList.size();
         }
+        Log.i("mahao","manactivity_len"+ len);
         return len;
     }
 
@@ -57,7 +60,11 @@ public class GridViewAdapter extends BaseAdapter {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.mImageView.setImageResource(mIntegerList.get(i));
+
+        Picasso.with(mContext).load(mIntegerList.get(i)).fit()
+                //.placeholder(R.mipmap.ic_launcher)
+                .into(holder.mImageView);
+
         return convertView;
     }
 

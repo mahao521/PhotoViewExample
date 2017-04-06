@@ -2,7 +2,6 @@ package com.mahao.photoviewexample.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 import com.bm.library.Info;
 import com.bm.library.PhotoView;
 import com.mahao.photoviewexample.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -22,25 +22,25 @@ import java.util.List;
  */
 public class ViewPagerAdapter extends PagerAdapter {
 
-    private List<Integer> mList;
+    private List<String> mList;
     private Context mContext;
     private View mCurrentView;
     private GridView mGridView;
     private Info mInfo;
     private View  layoutView;
-    private int count = 1;
-    private int currentPosition = 0;
+    private boolean flag = true;
+    private boolean currentFalg = false;
 
-    public ViewPagerAdapter(List<Integer> list, Context context, GridView gridView
-    ,View layoutView,int position){
+    public ViewPagerAdapter(List<String> list, Context context, GridView gridView
+            ,View layoutView,boolean position){
 
         this.mList = list;
         this.mContext = context;
         this.mGridView = gridView;
+        Log.i("mahao",mGridView.getChildCount()+".." + mGridView.getAdapter().getCount());
         this.layoutView = layoutView;
-        currentPosition = position;
+        currentFalg = position;
     }
-
 
 
     @Override
@@ -72,6 +72,17 @@ public class ViewPagerAdapter extends PagerAdapter {
         return mCurrentView;
     }
 
+
+    //更显状态
+    public void updateFlag (Boolean flag){
+
+        this.currentFalg = flag;
+        //if(currentFalg == true){
+
+            notifyDataSetChanged();
+       // }
+    }
+
     @Override
     public Object instantiateItem(ViewGroup container,final int position) {
 
@@ -82,33 +93,24 @@ public class ViewPagerAdapter extends PagerAdapter {
             parent.removeAllViews();
         }
         final PhotoView photoView = (PhotoView) view.findViewById(R.id.photo_view);
-        photoView.setImageResource(mList.get(position));
+       // photoView.setImageResource(mList.get(position));
+        Picasso.with(mContext).load(mList.get(position)).fit()
+               // .placeholder(R.mipmap.ic_launcher)
+                 .into(photoView);
         photoView.enable();
-
-        View girdItem =  mGridView.getChildAt(position);
-        ImageView image = (ImageView) girdItem.findViewById(R.id.img_grid_item);
-        mInfo = PhotoView.getImageViewInfo(image);
         view.setTag(position);
 
-        if(currentPosition != -1){
+        //只有每次更换adapter的时候，第一个点击的视图需要添加动画
+        if(flag == currentFalg){
 
-
+            View girdItem =  mGridView.getChildAt(position);
+            Log.i("mahao",mGridView.getChildCount()+"..........."+girdItem);
+            ImageView image = (ImageView) girdItem.findViewById(R.id.img_grid_item);
+            mInfo = PhotoView.getImageViewInfo(image);
+            Log.i("mahao","111111111111111111111111111111111111111111111");
+            photoView.animaFrom(mInfo);
+            currentFalg = false;
         }
-
-        //item 只执行一次
-
-         /* if(currentPosition != -1 ){
-
-                Log.i("mahao","cur-----------" + currentPosition);
-
-                View girdItem =  mGridView.getChildAt(position);
-                //  Log.i("mahao",position + ".."+ girdItem);
-                ImageView image = (ImageView) girdItem.findViewById(R.id.img_grid_item);
-                mInfo = PhotoView.getImageViewInfo(image);
-                photoView.animaFrom(mInfo);
-            }*/
-
-       // Log.i("mahao",position + ".."+ mGridView);
 
         photoView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +118,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
                 View girdItem =  mGridView.getChildAt(position);
                 ImageView image = (ImageView) girdItem.findViewById(R.id.img_grid_item);
-                mInfo = PhotoView.getImageViewInfo(image);
+                Info mInfo = PhotoView.getImageViewInfo(image);
                 Toast.makeText(mContext, "view_pager--2..." + position, Toast.LENGTH_SHORT).show();
                 photoView.animaTo(mInfo, new Runnable() {
                     @Override
@@ -129,5 +131,10 @@ public class ViewPagerAdapter extends PagerAdapter {
         });
         container.addView(view);
         return view;
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 }

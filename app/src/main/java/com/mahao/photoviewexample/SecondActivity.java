@@ -7,8 +7,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.mahao.photoviewexample.adapter.ListviewAdapter;
-
-import static com.mahao.photoviewexample.R.id.layout_viewpager_second;
+import com.mahao.photoviewexample.utils.MyViewPager;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -23,6 +22,7 @@ public class SecondActivity extends AppCompatActivity {
 
         mListView = (ListView) findViewById(R.id.list_view);
         mViewPager = (ViewPager) findViewById(R.id.viewpager_second);
+
 
         View viewLayout = findViewById(R.id.layout_viewpager_second);
 
