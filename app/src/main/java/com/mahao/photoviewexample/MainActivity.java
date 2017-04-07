@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onPageSelected(int position) {
 
-                Log.i("mahao","first");
+                Log.i("mahao","first___");
                 mCount.setText((position+1)+"/"+mList.size());
                 initPhoto(position,false);
 
